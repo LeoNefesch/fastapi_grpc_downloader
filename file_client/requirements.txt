@@ -1,0 +1,4 @@
+fastapi[all]
+grpcio
+grpcio-tools
+pytest

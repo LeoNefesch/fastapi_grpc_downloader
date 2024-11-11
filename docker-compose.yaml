@@ -1,0 +1,31 @@
+version: "3.9"
+services:
+
+    file_client:
+        build:
+            context: .
+            dockerfile: file_client/Dockerfile
+        environment:
+            FILE_SERVER_HOST: file_server
+        image: file_client
+        networks:
+            - microservices
+        ports:
+            - 8000:8000
+        volumes:
+            - file_storage:/service/file_storage
+    file_server:
+        build:
+            context: .
+            dockerfile: file_server/Dockerfile
+        image: file_server
+        networks:
+            - microservices
+        volumes:
+            - file_storage:/service/file_storage
+
+volumes:
+    file_storage:
+
+networks:
+    microservices:

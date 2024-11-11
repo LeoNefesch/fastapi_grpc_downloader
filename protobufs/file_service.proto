@@ -1,0 +1,26 @@
+syntax = "proto3";
+
+package file_service;
+
+service FileService {
+  rpc UploadFile (stream UploadFileRequest) returns (UploadFileResponse);
+  rpc GetFile (GetFileRequest) returns (stream GetFileResponse);
+}
+
+message UploadFileRequest {
+  string filename = 1;
+  bytes content = 2;
+}
+
+message UploadFileResponse {
+  string message = 1;
+}
+
+message GetFileRequest {
+  string filename = 1;
+}
+
+message GetFileResponse {
+  bytes content = 1;
+  bool is_last_chunk = 2;
+}
